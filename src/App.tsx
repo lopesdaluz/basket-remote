@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../src/productSlice";
+import type { AppDispatch } from "./store";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const dispatch = useDispatch<AppDispatch>(); // Add type for dispatch
+
+  useEffect(() => {
+    dispatch(fetchProducts()); // Now TypeScript knows it's a thunk action
+  }, [dispatch]);
+
+  return <div>Welcome to the Basket Remote App</div>;
+};
 
 export default App;
